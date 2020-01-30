@@ -1,0 +1,9 @@
+version: "3"
+services:
+  callcenter-asterisk:
+    build:
+      context: .
+    ports:
+      - "8088:8088/tcp"
+      - "8089:8089/tcp"
+    restart: on-failure

@@ -1,0 +1,581 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API Express",
+    "description": "A simple REST API developed using the Express.js framework. The API contains: Communication via HTTP and HTTPS, communication with the MongoDB database, JWT authentication, documentation with Swagger, endpoints management and metrics with Swagger-stats, files to the Docker, CORS control, route control, testing endpoints using Jest, a simple CRUD, among others.\n<br/>API metrics and statistics: <a href=\"/swagger-stats/ui\">Swagger-stats</a>"
+  },
+  "host": "localhost:8088",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "User",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Books",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/signup": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Register a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userSignup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created!",
+            "schema": {
+              "$ref": "#/definitions/userSignupResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "User already registered"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Authenticates a user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userLogin"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully logged in!",
+            "schema": {
+              "$ref": "#/definitions/userSignupResponse"
+            }
+          },
+          "400": {
+            "description": "Missing username or password"
+          },
+          "401": {
+            "description": "User already registered"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Unauthenticates a user",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "View user's personal information. NOTE: Requires token",
+        "parameters": [
+          {
+            "name": "authorization",
+            "description": "Bearer <token>",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/userProfile"
+            }
+          },
+          "204": {
+            "description": "Content not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/books": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Returns all books.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/booksResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Create a new book",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/booksPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Content found",
+            "schema": {
+              "$ref": "#/definitions/bookResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Returns a book by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Book ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/bookResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Update a book by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bookUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/bookResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Delete a book by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Book ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/bookResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/books/{id}/title": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "description": "Returns a book title by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Book ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/booksGetTitleById"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    }
+  },
+  "definitions": {
+    "userSignup": {
+      "required": [
+        "username",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "user.name"
+        },
+        "email": {
+          "type": "string",
+          "example": "test@test.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        }
+      }
+    },
+    "userSignupResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "message": {
+          "type": "object",
+          "example": null
+        },
+        "token": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "5e291032d7c1972f8f2f093e"
+            },
+            "username": {
+              "type": "string",
+              "example": "username"
+            },
+            "urlImg": {
+              "type": "object",
+              "example": null
+            },
+            "firstName": {
+              "type": "object",
+              "example": null
+            },
+            "lastName": {
+              "type": "object",
+              "example": null
+            },
+            "email": {
+              "type": "object",
+              "example": null
+            },
+            "about": {
+              "type": "object",
+              "example": null
+            }
+          }
+        }
+      }
+    },
+    "userLogin": {
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "user.name"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        }
+      }
+    },
+    "userProfile": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "message": {
+          "type": "object",
+          "example": null
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "5e291032d7c1972f8f2f093e"
+            },
+            "username": {
+              "type": "string",
+              "example": "username"
+            },
+            "urlImg": {
+              "type": "object",
+              "example": null
+            },
+            "firstName": {
+              "type": "object",
+              "example": null
+            },
+            "lastName": {
+              "type": "object",
+              "example": null
+            },
+            "email": {
+              "type": "object",
+              "example": null
+            },
+            "about": {
+              "type": "object",
+              "example": null
+            }
+          }
+        }
+      }
+    },
+    "booksResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "message": {
+          "type": "object",
+          "example": null
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "required": [
+              "_id",
+              "title",
+              "author"
+            ],
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "5e291032d7c1972f8f2f093e"
+              },
+              "title": {
+                "type": "string",
+                "example": "Book's Title"
+              },
+              "author": {
+                "type": "string",
+                "example": "Book Author"
+              }
+            }
+          }
+        }
+      }
+    },
+    "bookResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "message": {
+          "type": "object",
+          "example": null
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "_id",
+            "title",
+            "author"
+          ],
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "5e291032d7c1972f8f2f093e"
+            },
+            "title": {
+              "type": "string",
+              "example": "Book's Title"
+            },
+            "author": {
+              "type": "string",
+              "example": "Book Author"
+            }
+          }
+        }
+      }
+    },
+    "booksGetTitleById": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "message": {
+          "type": "object",
+          "example": null
+        },
+        "data": {
+          "type": "string",
+          "example": "Book's title"
+        }
+      }
+    },
+    "booksPost": {
+      "required": [
+        "title",
+        "author"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Book's title"
+        },
+        "author": {
+          "type": "string",
+          "example": "Book author"
+        }
+      }
+    },
+    "bookUpdate": {
+      "required": [
+        "name",
+        "photoUrls"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Book's title (update)"
+        },
+        "author": {
+          "type": "string",
+          "example": "Book author (update)"
+        }
+      }
+    }
+  }
+}
