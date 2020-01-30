@@ -7,7 +7,7 @@ const { testSetup } = require('./setup')
 
 testSetup('test_books')
 
-var _id = null
+let _id = null
 
 it('Endpoint: /api/v1/books', async () => {
   const res = await request.post('/api/v1/books').send({

@@ -1,6 +1,6 @@
-var tape = require('tape')
-var _test = require('tape-promise').default
-var test = _test(tape)
+const tape = require('tape')
+const _test = require('tape-promise').default
+const test = _test(tape)
 
 
 /* EXAMPLE (With Promise):

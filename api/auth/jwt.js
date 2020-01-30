@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 
 
 function generateToken(id) {
-    var privateKey = fs.readFileSync('./api/auth/example.private.key', 'utf8')
-    var token = jwt.sign({ id }, privateKey, {
+    const privateKey = fs.readFileSync('./api/auth/example.private.key', 'utf8')
+    const token = jwt.sign({ id }, privateKey, {
         expiresIn: 300,     // 5min 
         algorithm: "RS256"  // SHA-256 hash signature
     })
@@ -12,7 +12,7 @@ function generateToken(id) {
 }
 
 function verify(req, res, next) {
-    var token = req.headers['authorization']
+    let token = req.headers['authorization']
     if (!token)
         return res.status(401).send({ status: 'fail', message: 'No token provided.', data: null })
 
@@ -21,7 +21,7 @@ function verify(req, res, next) {
 
     token = token.split('Bearer ')[1]
 
-    var publicKey = fs.readFileSync('./api/auth/example.public.key', 'utf8');
+    const publicKey = fs.readFileSync('./api/auth/example.public.key', 'utf8');
     jwt.verify(token, publicKey, { algorithm: ["RS256"] }, function (err, decoded) {
         if (err)
             return res.status(401).send({ status: 'fail', message: 'Invalid token.', data: null })

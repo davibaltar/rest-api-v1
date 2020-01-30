@@ -52,7 +52,7 @@ exports.getTitleById = (req, res, next) => {
 // Create a new book
 exports.post = (req, res, next) => {
 	try {
-		var body = req.body
+		const body = req.body
 		if (!body.title || !body.author)
 			return res.status(400).json({ status: 'fail', message: "Missing parameter", data: null })
 		booksCollection.create({ title: body.title, author: body.author }, (err, newBook) => {
@@ -72,7 +72,7 @@ exports.post = (req, res, next) => {
 // Update a book by ID
 exports.put = (req, res, next) => {
 	try {
-		var body = req.body
+		const body = req.body
 		booksCollection.findByIdAndUpdate(req.params.id, {
 			title: body.title || '',
 			author: body.author || ''

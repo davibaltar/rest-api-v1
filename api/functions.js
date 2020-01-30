@@ -4,12 +4,12 @@ const Queue = require("promise-queue")
 Queue.configure(require('vow').Promise) 
 
 // Exemple:
-// var queue = new Queue(1, 1000)
+// let queue = new Queue(1, 1000)
 // queue.add(f => myFunction(queueName))    // NOTE.: 'myFunction' must be implemented using 'Promise'
 
 function dateTimeDiffObj(finalDate, initialDate) {
-    var ms = Math.abs(finalDate.getTime() - initialDate.getTime())
-    var diff = {}
+    let ms = Math.abs(finalDate.getTime() - initialDate.getTime())
+    let diff = {}
 
     for (diff.years = 0; ms >= 31536000000; diff.years++ , ms -= 31536000000)
     for (diff.months = 0; ms >= 2628000000; diff.months++ , ms -= 2628000000)
@@ -22,8 +22,8 @@ function dateTimeDiffObj(finalDate, initialDate) {
 }
 
 function isInternalIp(req) {
-    var internalIP = "::ffff:189.90.240.161"
-    var ipv4 = req.headers['x-forwarded-for'] ||
+    const internalIP = "::ffff:1.2.3.4"
+    const ipv4 = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
         req.connection.socket.remoteAddress
@@ -35,10 +35,10 @@ function isNumeric(n) {
 }
 
 function timeInterval(start, end, time) {
-    var start_hours = parseInt(start.split(':')[0])
-    var start_minutes = parseInt(start.split(':')[1])
-    var end_hours = parseInt(end.split(':')[0])
-    var end_minutes = parseInt(end.split(':')[1])
+    const start_hours = parseInt(start.split(':')[0])
+    const start_minutes = parseInt(start.split(':')[1])
+    const end_hours = parseInt(end.split(':')[0])
+    const end_minutes = parseInt(end.split(':')[1])
 
     if (time)
         return (
