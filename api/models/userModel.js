@@ -38,7 +38,20 @@ const userSchema = new mongoose.Schema({
     about: {
         type: String,
         default: 'About me'
+    },
+    createdAt: {
+        type: Date
+    },
+    updatedAt: {
+        type: Date
     }
+})
+
+userSchema.pre('save', function (next) {
+    this.updatedAt = new Date()
+    if (!this.createdAt)
+        this.createdAt = new Date()
+    next()
 })
 
 const user = mongoose.model('user', userSchema)

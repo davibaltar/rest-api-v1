@@ -389,6 +389,12 @@
             "about": {
               "type": "object",
               "example": null
+            },
+            "createdAt": {
+              "type": "string"
+            },
+            "updatedAt": {
+              "type": "string"
             }
           }
         }
@@ -451,6 +457,12 @@
             "about": {
               "type": "object",
               "example": null
+            },
+            "createdAt": {
+              "type": "string"
+            },
+            "updatedAt": {
+              "type": "string"
             }
           }
         }
@@ -487,6 +499,12 @@
               "author": {
                 "type": "string",
                 "example": "Book Author"
+              },
+              "createdAt": {
+                "type": "string"
+              },
+              "updatedAt": {
+                "type": "string"
               }
             }
           }
@@ -523,6 +541,12 @@
             "author": {
               "type": "string",
               "example": "Book Author"
+            },
+            "createdAt": {
+              "type": "string"
+            },
+            "updatedAt": {
+              "type": "string"
             }
           }
         }
