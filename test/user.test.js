@@ -5,7 +5,7 @@ const request = supertest(app)
 const { testSetup } = require('./setup')
 
 
-testSetup('teste_user')
+testSetup('test_user')
 
 it('Endpoint: /api/v1/user/signup', async (done) => {
   const res = await request.post('/api/v1/user/signup').send({

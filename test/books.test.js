@@ -5,7 +5,7 @@ const request = supertest(app)
 const { testSetup } = require('./setup')
 
 
-testSetup('teste_books')
+testSetup('test_books')
 
 var _id = null
 
