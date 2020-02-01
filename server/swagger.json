@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "API Express",
-    "description": "A simple REST API developed using the Express.js framework. The API contains: Communication via HTTP and HTTPS, communication with the MongoDB database, JWT authentication, documentation with Swagger, endpoints management and metrics with Swagger-stats, files to the Docker, CORS control, route control, testing endpoints using Jest, a simple CRUD, among others.\n<br/>API metrics and statistics: <a href=\"/swagger-stats/ui\">Swagger-stats</a>"
+    "title": "REST API v1",
+    "description": "A simple REST API developed using the Express.js framework. The API contains: Communication via HTTP and HTTPS, communication with the MongoDB database, JWT authentication, documentation with Swagger, endpoints management and metrics with Swagger-stats, files to the Docker, CORS control, route control, regex, testing endpoints using Jest, a simple CRUD, among others.\n<br/>API metrics and statistics: <a href=\"/swagger-stats/ui\">Swagger-stats</a>"
   },
   "host": "localhost:8088",
   "basePath": "/api/v1",
