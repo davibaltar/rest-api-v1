@@ -1,5 +1,5 @@
 const jwt = require('../auth/jwt')
-const userCollection = require('../models/userModel')
+const Users = require('../models/userModel')
 const bcrypt = require('bcryptjs')
 
 
@@ -10,10 +10,10 @@ exports.signup = async (req, res, next) => {
         if (!body.username || !body.password)
             return res.status(400).json({ status: 'fail', message: "Missing username or password", token: null, data: null })
 
-        if (await userCollection.findOne({ username: body.username }))
+        if (await Users.findOne({ username: body.username }))
             return res.status(401).json({ status: 'fail', message: "User already registered", token: null, data: null })
 
-        const user = await userCollection.create({
+        const user = await Users.create({
             username: body.username,
             email: body.email,
             password: await bcrypt.hash(body.password, 10)    // Hashing the password
@@ -34,7 +34,7 @@ exports.login = async (req, res, next) => {
         if (!body.username || !body.password)
             return res.status(400).json({ status: 'fail', message: "Missing username or password", token: null, data: null })
 
-        const user = await userCollection.findOne({ username: body.username })
+        const user = await Users.findOne({ username: body.username })
         if (!user || !await bcrypt.compare(body.password, user.password))
             return res.status(401).json({ status: 'fail', message: "Username or Password is wrong", token: null, data: null })
 
@@ -53,7 +53,7 @@ exports.logout = (req, res, next) => {
 
 exports.profile = async (req, res, next) => {
     try {
-        const user = await userCollection.findById(req.userId)
+        const user = await Users.findById(req.userId)
         if (!user)
             return res.status(204).send({ status: 'fail', message: "No Content", token: null, data: null })
 

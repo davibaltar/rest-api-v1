@@ -1,5 +1,5 @@
 
-const booksCollection = require('../models/booksModel')
+const Books = require('../models/booksModel')
 
 
 /*******/
@@ -9,7 +9,7 @@ const booksCollection = require('../models/booksModel')
 // Returns all books
 exports.get = (req, res, next) => {
 	try {
-		booksCollection.find({}).lean().exec((err, docs) => {
+		Books.find({}).lean().exec((err, docs) => {
 			if (err)
 				return res.status(400).json({ status: 'fail', message: err.toString(), data: null })
 			return res.status(200).json({ status: 'success', message: null, data: docs })
@@ -22,7 +22,7 @@ exports.get = (req, res, next) => {
 // Returns a book by ID
 exports.getById = (req, res, next) => {
 	try {
-		booksCollection.findById(req.params.id, (err, book) => {
+		Books.findById(req.params.id, (err, book) => {
 			if (err)
 				return res.status(400).json({ status: 'fail', message: err.toString(), data: null })
 			return res.status(200).json({ status: 'success', message: null, data: book })
@@ -35,7 +35,7 @@ exports.getById = (req, res, next) => {
 // Returns a book title by ID
 exports.getTitleById = (req, res, next) => {
 	try {
-		booksCollection.findById(req.params.id, (err, book) => {
+		Books.findById(req.params.id, (err, book) => {
 			if (err)
 				return res.status(400).json({ status: 'fail', message: err.toString(), data: null })
 			return res.status(200).json({ status: 'success', message: null, data: book ? book.title : null })
@@ -55,7 +55,7 @@ exports.post = (req, res, next) => {
 		const body = req.body
 		if (!body.title || !body.author)
 			return res.status(400).json({ status: 'fail', message: "Missing parameter", data: null })
-		booksCollection.create({ title: body.title, author: body.author }, (err, newBook) => {
+		Books.create({ title: body.title, author: body.author }, (err, newBook) => {
 			if (err)
 				return res.status(400).json({ status: 'fail', message: err.toString(), data: null })
 			return res.status(201).json({ status: 'success', message: null, data: newBook })
@@ -73,7 +73,7 @@ exports.post = (req, res, next) => {
 exports.put = (req, res, next) => {
 	try {
 		const body = req.body
-		booksCollection.findByIdAndUpdate(req.params.id, {
+		Books.findByIdAndUpdate(req.params.id, {
 			title: body.title || '',
 			author: body.author || ''
 		}, { new: true }).then(book => {
@@ -97,7 +97,7 @@ exports.put = (req, res, next) => {
 // Delete a book by ID
 exports.delete = (req, res, next) => {
 	try {
-		booksCollection.findByIdAndRemove(req.params.id).then(book => {
+		Books.findByIdAndRemove(req.params.id).then(book => {
 			if (!book)
 				return res.status(200).json({ status: 'fail', message: null, data: null })
 			return res.status(200).json({ status: 'success', message: null, data: book })
