@@ -3,7 +3,7 @@ A simple REST API developed using the Express.js framework. The API contains: Co
 
 | Project Info |
 |--------------|
-| **name:** REST API v1 |
+| **Name:** REST API v1 |
 | **Developer:** Davi D. Baltar |
 | **Compatibility:** Windows Server e Linux Server |
 | **Documentation:** [http://localhost:8088/doc](http://localhost:8088/doc) |
