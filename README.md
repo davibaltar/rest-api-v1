@@ -1,5 +1,5 @@
 # rest-api-v1
-A simple REST API developed using the Express.js framework. The API contains: Communication via HTTP and HTTPS, communication with the MongoDB database, Redis to cache, JWT authentication + SHA-256, documentation with Swagger, endpoints management and metrics with Swagger-stats, files to the Docker, CORS control, route control, regex, testing endpoints using Jest, a simple CRUD, among others.
+A simple REST API developed using the Express.js framework. The API contains: Communication via HTTP and HTTPS, communication with the MongoDB database, caching with Redis, JWT authentication + SHA-256, documentation with Swagger, endpoints management and metrics with Swagger-stats, files to the Docker, CORS control, route control, regex, testing endpoints using Jest, a simple CRUD, among others.
 
 | Project Info |
 |--------------|
