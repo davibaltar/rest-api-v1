@@ -110,3 +110,7 @@ package-lock.json
 
 public.key
 private.key
+
+.DS_Store
+
+draft.js
