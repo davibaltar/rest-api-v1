@@ -19,7 +19,7 @@
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
     "lokijs": "^1.5.6",
-    "mongoose": "^5.8.9",
+    "mongoose": "^6.4.6",
     "node-datetime": "^2.1.2",
     "promise-queue": "^2.2.5",
     "redis": "^2.8.0",
